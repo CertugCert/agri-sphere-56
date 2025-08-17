@@ -40,7 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [fetchMe]);
 
   const login = useCallback(async (email: string, password: string) => {
-    const res = await api.post<{ accessToken: string; refreshToken: string }>('/auth/login', { email, password });
+    const res = await api.post<{ accessToken: string; refreshToken: string }>('/auth/login', { email, senha: password });
     localStorage.setItem('access_token', res.accessToken);
     localStorage.setItem('refresh_token', res.refreshToken);
     await fetchMe();
