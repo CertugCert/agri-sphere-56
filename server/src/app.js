@@ -15,6 +15,7 @@ import soloRoutes from './routes/solo.js';
 import adminAuthRoutes from './routes/admin.auth.js';
 import adminTenantsRoutes from './routes/admin.tenants.js';
 import tenantAuthRoutes from './routes/tenant.auth.js';
+import publicTenantsRoutes from './routes/public.tenants.js';
 import { requireMaster } from './middlewares/requireMaster.js';
 import { attachTenant } from './middlewares/attachTenant.js';
 const app = express();
@@ -38,6 +39,9 @@ app.get('/api/health', async (_req, res) => {
     res.status(500).json({ ok: false, db: 'disconnected', error: err.message });
   }
 });
+
+// Public routes
+app.use('/api/public', publicTenantsRoutes);
 
 // Master admin routes
 app.use('/api/admin/auth', adminAuthRoutes);
